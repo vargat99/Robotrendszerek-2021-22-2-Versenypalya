@@ -1,0 +1,8 @@
+prefix=/home/toto/Documents/GitHub/Robotrendszerek-2021-22-2-Versenypalya/catkin_ws/install
+
+Name: bme_gazebo_sensors
+Description: Description of bme_gazebo_sensors
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

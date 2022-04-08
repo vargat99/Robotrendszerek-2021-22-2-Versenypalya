@@ -1,2 +1,2 @@
-
+Week-5-6-Gazebo-sensors/bme_gazebo_sensors:versenypalya:vonalkovetes
 -DCATKIN_DEVEL_PREFIX=/home/toto/Documents/GitHub/Robotrendszerek-2021-22-2-Versenypalya/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/toto/Documents/GitHub/Robotrendszerek-2021-22-2-Versenypalya/catkin_ws/install -G Unix Makefiles
