@@ -3,7 +3,7 @@
 <launch>
 
   <!-- World File -->
-  <arg name="world_file" default="$(find versenypalya)/worlds/hungaroring.world"/>
+  <arg name="world_file" default="$(find versenypalya)/worlds/hungaroring/hungaroring2.world"/>
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
