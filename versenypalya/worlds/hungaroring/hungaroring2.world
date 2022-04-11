@@ -141,7 +141,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/home/toto/Documents/GitHub/Robotrendszerek-2021-22-2-Versenypalya/catkin_ws/src/meshes/track.dae</uri>
+              <uri>model://hungaroring/meshes/track.dae</uri>
               <scale>0.1 0.1 0.1</scale>
             </mesh>
           </geometry>
@@ -154,7 +154,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/home/toto/Documents/GitHub/Robotrendszerek-2021-22-2-Versenypalya/catkin_ws/src/meshes/track.dae</uri>
+              <uri>model://hungaroring/meshes/track.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
