@@ -1,8 +1,0 @@
-prefix=/home/toto/Documents/GitHub/Robotrendszerek-2021-22-2-Versenypalya/catkin_ws/devel
-
-Name: versenypalya
-Description: Description of versenypalya
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
