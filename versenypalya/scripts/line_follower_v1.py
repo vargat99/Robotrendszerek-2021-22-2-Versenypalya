@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
@@ -70,9 +70,9 @@ class cvThread(threading.Thread):
 
         R,G,B = self.convert2rgb(img)
 
-        #gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        lower_white = np.array([0,0,0], dtype=np.uint8)
-        upper_white = np.array([0,0,255], dtype=np.uint8)
+        gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        lower_white = np.array([30,30,30], dtype=np.uint8)
+        upper_white = np.array([50,255,255], dtype=np.uint8)
         
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         #lower_yellow = np.array([20,100,100])
@@ -81,7 +81,7 @@ class cvThread(threading.Thread):
         #redMask = self.thresholdBinary(R, (220, 255))
         mask = cv2.inRange(hsv, lower_white, upper_white)
         #mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
-        #mask_white = cv2.inRange(gray_image, 140, 255)
+        mask_white = cv2.inRange(gray_image, 140, 255)
         res = cv2.bitwise_and(img,img, mask= mask)
         M = cv2.moments(mask, False)
         stackedMask = np.dstack((mask, mask, mask))
@@ -123,7 +123,7 @@ class cvThread(threading.Thread):
                     self.cmd_vel.angular.z = -0.2
 
             else:
-                self.cmd_vel.linear.x = 0.2
+                self.cmd_vel.linear.x = 1
                 self.cmd_vel.angular.z = 0
 
         else:

@@ -88,6 +88,7 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <model name='hungaroring'>
+    <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -118,7 +119,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://hungaroring/meshes/track.dae</uri>
+              <uri>model://meshes/hungaroring/meshes/track.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
