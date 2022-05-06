@@ -23,7 +23,7 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/toto/Desktop/Robotrendszerek_catkin_ws/src/versenypalya/meshes/hungaroring/meshes/track.dae</uri>
+            <uri>model://hungaroring/meshes/track.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -36,7 +36,7 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/toto/Desktop/Robotrendszerek_catkin_ws/src/versenypalya/meshes/hungaroring/meshes/track.dae</uri>
+            <uri>model://hungaroring/meshes/track.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
