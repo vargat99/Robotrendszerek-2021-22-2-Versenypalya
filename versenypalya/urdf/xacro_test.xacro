@@ -1,0 +1,84 @@
+<?xml version='1.0'?>
+
+<robot name="test_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- RViz colors -->
+  <xacro:include filename="$(find urdf_examples)/urdf/materials.xacro" />
+
+  <!-- Include wheel macros -->
+  <xacro:include filename="$(find urdf_examples)/urdf/wheel.xacro" />
+
+  <!-- Pi -->
+  <xacro:property name="M_PI" value="3.14159"/>
+
+  <!-- Base Size -->
+  <xacro:property name="base_x_size" value="2.285" />
+  <xacro:property name="base_y_size" value="0.806" />
+  <xacro:property name="base_z_size" value="1.369" />
+
+  <!-- Wheel Mounting Positions -->
+  <xacro:property name="wheelbase" value="0.152" />
+  <xacro:property name="track" value="0.06" />
+  <xacro:property name="wheel_vertical_offset" value="0.015" />
+
+  <!-- Wheel Properties -->
+  <xacro:property name="wheel_length" value="0.296" /> 
+  <xacro:property name="wheel_radius" value="0.15365" />
+
+  <link name="base_footprint"></link>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+
+  <!-- Robot chassis -->
+  <link name='base_link'>
+    <pose>0 0 0.1 0 0 0</pose>
+
+    <inertial>
+      <mass value="15.0"/>
+      <origin xyz="0.0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+      </geometry>
+    </collision>
+
+    <visual name='base_link_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!--box size="${base_x_size} ${base_y_size} ${base_z_size}"/-->
+        <!--mesh filename = "package://urdf_examples/meshes/base_link.dae"/-->
+        <mesh filename = "package://urdf_examples/meshes/CarBody.dae"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+  </link>
+
+  <!-- Wheel macros -->
+  <xacro:test_wheel wheel_prefix="front_left">
+    <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:test_wheel>
+  <xacro:test_wheel wheel_prefix="front_right">
+    <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:test_wheel>
+  <xacro:test_wheel wheel_prefix="rear_left">
+    <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:test_wheel>
+  <xacro:test_wheel wheel_prefix="rear_right">
+    <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+  </xacro:test_wheel>
+
+
+</robot>
