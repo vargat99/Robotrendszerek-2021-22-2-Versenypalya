@@ -2,11 +2,11 @@
 
 <launch>
 
-  <arg name="model" default="$(find urdf_examples)/urdf/xacro_test.xacro"/>
+  <arg name="model" default="$(find versenypalya)/urdf/xacro_test.xacro"/>
   <arg name="gui" default="true" />
-  <arg name="rvizconfig" default="$(find urdf_examples)/rviz/check_urdf.rviz" />
+  <arg name="rvizconfig" default="$(find versenypalya)/rviz/check_urdf.rviz" />
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+  <param name="robot_description" command="rosrun xacro xacro --inorder $(arg model)" />
   <param name="use_gui" value="$(arg gui)"/>
 
   <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />

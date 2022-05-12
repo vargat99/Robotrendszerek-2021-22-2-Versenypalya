@@ -2,19 +2,22 @@
 
 <robot name="test_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <!-- Gazebo plugin -->
+  <xacro:include filename="$(find versenypalya)/urdf/test_bot.gazebo" />
+
   <!-- RViz colors -->
-  <xacro:include filename="$(find urdf_examples)/urdf/materials.xacro" />
+  <xacro:include filename="$(find versenypalya)/urdf/materials.xacro" />
 
   <!-- Include wheel macros -->
-  <xacro:include filename="$(find urdf_examples)/urdf/wheel.xacro" />
+  <xacro:include filename="$(find versenypalya)/urdf/wheel.xacro" />
 
   <!-- Pi -->
   <xacro:property name="M_PI" value="3.14159"/>
 
   <!-- Base Size -->
-  <xacro:property name="base_x_size" value="2.285" />
-  <xacro:property name="base_y_size" value="0.806" />
-  <xacro:property name="base_z_size" value="1.369" />
+  <xacro:property name="base_x_size" value="0.2285" />
+  <xacro:property name="base_y_size" value="0.0806" />
+  <xacro:property name="base_z_size" value="0.1369" />
 
   <!-- Wheel Mounting Positions -->
   <xacro:property name="wheelbase" value="0.152" />
@@ -22,8 +25,8 @@
   <xacro:property name="wheel_vertical_offset" value="0.015" />
 
   <!-- Wheel Properties -->
-  <xacro:property name="wheel_length" value="0.296" /> 
-  <xacro:property name="wheel_radius" value="0.15365" />
+  <xacro:property name="wheel_length" value="0.0296" /> 
+  <xacro:property name="wheel_radius" value="0.015365" />
 
   <link name="base_footprint"></link>
 
@@ -59,7 +62,7 @@
       <geometry>
         <!--box size="${base_x_size} ${base_y_size} ${base_z_size}"/-->
         <!--mesh filename = "package://urdf_examples/meshes/base_link.dae"/-->
-        <mesh filename = "package://urdf_examples/meshes/CarBody.dae"/>
+        <mesh filename = "package://versenypalya/meshes/CarBody.dae"/>
       </geometry>
       <material name="orange"/>
     </visual>
@@ -79,6 +82,66 @@
   <xacro:test_wheel wheel_prefix="rear_right">
     <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:test_wheel>
+
+
+  <!-- Camera -->
+  <joint type="fixed" name="camera_joint">
+    <origin xyz="0.225 0 0.075" rpy="0 0 0"/>
+    <child link="camera_link"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <link name='camera_link'>
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="1e-6" ixy="0" ixz="0"
+          iyy="1e-6" iyz="0"
+          izz="1e-6"
+      />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <geometry>
+        <box size=".05 .05 .05"/>
+      </geometry>
+    </collision>
+
+    <visual name='camera_link_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size=".05 .05 .05"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+  <gazebo reference="camera_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <joint type="fixed" name="camera_optical_joint">
+    <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
+    <child link="camera_link_optical"/>
+    <parent link="camera_link"/>
+  </joint>
+
+  <link name="camera_link_optical">
+  </link>
+
+  <!-- IMU -->
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="imu_link" />
+  </joint>
+
+  <link name="imu_link">
+  </link>
 
 
 </robot>

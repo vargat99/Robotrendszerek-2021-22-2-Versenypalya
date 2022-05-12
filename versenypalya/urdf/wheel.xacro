@@ -3,7 +3,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="test_wheel">
 
 	<xacro:macro name="test_wheel" params="wheel_prefix *joint_pose">
-		<link name="${wheel_prefix}_wheel_link">
+		<link name="${wheel_prefix}">
 			<inertial>
 				<mass value="2.637" />
 				<origin xyz="0 0 0" rpy="0 ${M_PI/2} ${M_PI/2}"/>
@@ -14,7 +14,7 @@
 				<geometry>
                     <!--cylinder length="${wheel_length}" radius="${wheel_radius}" /-->
                     <!--mesh filename = "package://urdf_examples/meshes/wheel.dae"/-->
-					<mesh filename = "package://urdf_examples/meshes/wheel_v1.dae"/>
+					<mesh filename = "package://versenypalya/meshes/wheel_v1.dae"/>
 				</geometry>
                 <material name="green"/>
 			</visual>
@@ -26,7 +26,7 @@
 			</collision>
 		</link>
 
-		<gazebo reference="${wheel_prefix}_wheel_link">
+		<gazebo reference="${wheel_prefix}">
 			<mu1 value="1.0"/>
 			<mu2 value="1.0"/>
 			<kp value="10000000.0" />
@@ -36,7 +36,7 @@
 
 		<joint name="${wheel_prefix}_wheel" type="continuous">
 			<parent link="base_link"/>
-			<child link="${wheel_prefix}_wheel_link"/>
+			<child link="${wheel_prefix}"/>
 			<xacro:insert_block name="joint_pose"/>
 			<axis xyz="0 1 0" rpy="0 0 0" />
 		</joint>
