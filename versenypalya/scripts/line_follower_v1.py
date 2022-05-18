@@ -114,20 +114,20 @@ class cvThread(threading.Thread):
             cv2.line(crosshairMask,(int(cols/2),0),(int(cols/2),rows),(255,0,0),10)
 
             # Chase the ball
-            #print(abs(cols - cx), cx, cols)
-            if abs(cols/2 - cx) > 20:
-                self.cmd_vel.linear.x = 0
-                if cols/2 > cx:
-                    self.cmd_vel.angular.z = 0.2
-                else:
-                    self.cmd_vel.angular.z = -0.2
+            #print(abs(cols/2 - cx), cx, cols)
+            error = (cols/2 - cx)
+            P_rot = 0.15
+            P_lin = 1.5
+            #P controller for linear.x
+            self.cmd_vel.linear.x = P_lin*(1-abs(error)/(cols/2))
+            print(P_lin*(1-abs(error)/cols))
 
-            else:
-                self.cmd_vel.linear.x = 1
-                self.cmd_vel.angular.z = 0
+            #P controller for angular.z
+            self.cmd_vel.angular.z = P_rot*error
+                
 
         else:
-            self.cmd_vel.linear.x = 0
+            self.cmd_vel.linear.x = 0.1
             self.cmd_vel.angular.z = 0
 
         # Publish cmd_vel

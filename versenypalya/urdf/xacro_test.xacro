@@ -17,7 +17,7 @@
   <!-- Base Size -->
   <xacro:property name="base_x_size" value="0.2285" />
   <xacro:property name="base_y_size" value="0.0806" />
-  <xacro:property name="base_z_size" value="0.1369" />
+  <xacro:property name="base_z_size" value="0.0369" />
 
   <!-- Wheel Mounting Positions -->
   <xacro:property name="wheelbase" value="0.152" />
@@ -51,7 +51,7 @@
     </inertial>
 
     <collision name='collision'>
-      <origin xyz="0 0 0" rpy="0 0 0"/> 
+      <origin xyz="0 0 0.02" rpy="0 0 0"/> 
       <geometry>
         <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
       </geometry>
@@ -86,7 +86,7 @@
 
   <!-- Camera -->
   <joint type="fixed" name="camera_joint">
-    <origin xyz="0.225 0 0.075" rpy="0 0 0"/>
+    <origin xyz="0 0 0.075" rpy="0 0 0"/>
     <child link="camera_link"/>
     <parent link="base_link"/>
     <axis xyz="0 1 0" />

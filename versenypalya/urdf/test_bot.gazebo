@@ -1,27 +1,34 @@
 <?xml version="1.0"?>
 <robot>
 
-  <!-- Differential drive with odometry -->
   <gazebo>
-    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-      <legacyMode>false</legacyMode>                         <!-- Set to true to swap right and left wheels, defaults to true -->
-      <updateRate>10</updateRate>                            <!-- Plugin update rate in Hz -->
-      <leftJoint>rear_left_wheel</leftJoint>                <!-- Name of left joint, defaults to `left_joint` -->
-      <rightJoint>rear_right_wheel</rightJoint>             <!-- Name of right joint, defaults to `right_joint` -->
-      <wheelSeparation>0.4</wheelSeparation>                 <!-- The distance from the center of one wheel to the other, in meters, defaults to 0.34 m -->
-      <wheelDiameter>0.2</wheelDiameter>                     <!-- Diameter of the wheels, in meters, defaults to 0.15 m -->
-      <wheelTorque>10</wheelTorque>                          <!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
-      <wheelAcceleration>1.0</wheelAcceleration>             <!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
-      <commandTopic>cmd_vel</commandTopic>                   <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
-      <odometryTopic>odom</odometryTopic>                    <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
-      <odometryFrame>odom</odometryFrame>                    <!-- Odometry frame, defaults to `odom` -->
-      <robotBaseFrame>base_footprint</robotBaseFrame>        <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
-      <odometrySource>world</odometrySource>                 <!-- Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
-      <publishWheelTF>false</publishWheelTF>                 <!-- Set to true to publish transforms for the wheel links, defaults to false -->
-      <publishOdomTF>true</publishOdomTF>                    <!-- Set to true to publish transforms for the odometry, defaults to true -->
-      <publishWheelJointState>false</publishWheelJointState> <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
-      <publishTf>1</publishTf>                               <!-- Set to 1 (true) to publish transforms from Gazebo, defaults to 1 -->
-      <rosDebugLevel>na</rosDebugLevel>                      <!-- ROS Debug level, defaults to na -->
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>10</updateRate>
+      <alwaysOn>true</alwaysOn>
+      <robotNamespace>/</robotNamespace>
+      <leftFrontJoint>front_left_wheel</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel</rightFrontJoint>
+      <leftRearJoint>rear_left_wheel</leftRearJoint>
+      <rightRearJoint>rear_right_wheel</rightRearJoint>
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+      <torque>10</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <publishWheelTF>false</publishWheelTF>
+      <publishWheelJointState>false</publishWheelJointState>
+      <rosDebugLevel>na</rosDebugLevel>
+      <wheelAcceleration>0</wheelAcceleration>
+      <wheelTorque>10</wheelTorque>
+      <odometrySource>world</odometrySource>
+      <publishTf>1</publishTf>
+      <publishOdomTF>true</publishOdomTF>
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.0001</covariance_yaw>
+      <broadcastTF>true</broadcastTF>
     </plugin>
   </gazebo>
 
