@@ -82,7 +82,7 @@ Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett,
 A projekt futásáról elérhető youtube video:
 
 <div align="center">
-[<img src="images/youtube_img.png"  width="1024" height="600">](https://youtu.be/oDQp8RPedYw)
+[![Videó megtekintése](https://img.youtube.com/vi/oDQp8RPedYw/default.jpg)](https://youtu.be/oDQp8RPedYw)
 </div>
 
 ## Telepítési útmatató
