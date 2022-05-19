@@ -18,12 +18,12 @@
 
 ## Tartalomjegyzék
 - [Feladat ismertetése](#Feladat-ismertetése)
-- [Megvalósítás](#heading-1)
-  * [Modellek létrehozása](#sub-heading-1)
-  * [Kamera beállítás](#sub-heading-1)
-  * [Vezérlés összehasonlítás - Köridők](#sub-heading-1)
-- [Eredmények](#heading-2)
-- [Telepítési útmutató](#heading-2)
+- [Megvalósítás](#Megvalósítás)
+  * [Modellek létrehozása](#Modellek-létrehozása)
+  * [Kamera beállítás](#kamera-beállítása)
+  * [Vezérlés összehasonlítás - Köridők](#Vezérlés-összehasonlítás---Köridők)
+- [Eredmények](#Eredmények)
+- [Telepítési útmutató](#Telepítési-útmutató)
 
 ## Feladat ismertetése
 
