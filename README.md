@@ -67,9 +67,9 @@ Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett,
  
 | Órai vezérlés körideje  | P vezérlés körideje |PID vezérlés körideje | (Pályarekord F1)|
 | ------------- | ------------- | ------------- | ------------- |
-| DNF  |~1:30:00 | ~1:15:00  | 1:13.447 |
+| DNF  |1:30:00 <  | 1:15:00 <  | 1:13.447 |
  
- A legrosszabb eredményt az órán használt egyszerű vezérléssel tette meg a versenyautó: élesebb kanyarokban elakadt. A legjobb eredményt a PID vezérléssel érte el.
+ A legrosszabb eredményt az órán használt egyszerű vezérléssel tette meg a versenyautó: élesebb kanyarokban elakadt / leesett a pályáról. A legjobb eredményt a PID vezérléssel érte el, látványosan gyorsabban haladt a pályán mint a 
  
  ### Eredmény
  
@@ -80,7 +80,10 @@ Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett,
 </div>
 
 A projekt futásáról elérhető youtube video:
-[![VIDEO](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
+<div align="center">
+[<img src="images/youtube_img.png"  width="1024" height="600">](https://www.youtube.com/watch?v=Hc79sDi3f0U)
+</div>
 
 ## Telepítési útmatató
 A projekt telepítése az alábbi lépésekből tevődik össze:
@@ -88,13 +91,19 @@ A projekt telepítése az alábbi lépésekből tevődik össze:
    ```sh
    git clone https://github.com/TODO](https://github.com/vargat99/Robotrendszerek-2021-22-2-Versenypalya.git
    ```
+* A hungaroring5.world fájl elérése abszolút hivatkozás alapú, így ezt módosítani kell a track.dae fájl mentési helyére: (113. és 126. sor)
+
+   ```sh
+  <uri>/home/catkin_ws/src/Robotrendszerek-2021-22-2-Versenypalya-main/versenypalya/meshes/hungaroring/meshes/track.dae</uri>
+   ```
+   
 * Launch fájl indítása
 
    ```sh
    roslaunch versenypalya spawn_robot.launch 
    ```
    
-* A megfelelő vezérlés elindítása
+* A megfelelő vezérlés elindítása: line_follower_P.py vagy line_follower_PID.py
 
    ```sh
    rosrun versenypalya line_follower_P.py
