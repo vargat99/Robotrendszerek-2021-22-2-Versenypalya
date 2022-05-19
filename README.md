@@ -74,7 +74,7 @@ Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett,
  A végső modell képes a versenypálya közepén elhelyezett sárga vonalat - kamera kép alapján - követni, így képes több kört megtenni a pályán.
  
 <div align="center">
-<img src="images/ALL_car_camera.png" alt="Logo" width="1847" height="1027">
+<img src="images/ALL_car_camera.png" alt="Logo" width="1024" height="600">
 </div>
 
 ## Telepítési útmatató
