@@ -18,7 +18,7 @@
   <!-- Launch our Gazebo world -->
   <include file="$(find versenypalya)/launch/world.launch"/>
 
-  <!-- Find mogi_bot description and send urdf to param server -->
+  <!-- Find test_bot description and send urdf to param server -->
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
 
   <!-- Send joint values-->
@@ -29,7 +29,7 @@
   <!-- Send robot states to tf -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
 
-  <!-- Spawn mogi_bot -->
+  <!-- Spawn test_bot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
     args="-urdf -param robot_description -model test_bot 
             -x $(arg x) -y $(arg y) -z $(arg z)
