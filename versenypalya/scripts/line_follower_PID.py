@@ -44,6 +44,8 @@ class cvThread(threading.Thread):
         self.cmd_vel.linear.x = 0
         self.cmd_vel.angular.z = 0
 
+        self.error_prev = 0
+
     def run(self):
         # Create a single OpenCV window
         cv2.namedWindow("frame", cv2.WINDOW_NORMAL)
@@ -68,21 +70,12 @@ class cvThread(threading.Thread):
 
         rows,cols = img.shape[:2]
 
-        R,G,B = self.convert2rgb(img)
-
-        gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        lower_white = np.array([30,30,30], dtype=np.uint8)
-        upper_white = np.array([50,255,255], dtype=np.uint8)
+        lower_yellow = np.array([30,30,30], dtype=np.uint8)
+        upper_yellow = np.array([50,255,255], dtype=np.uint8)
         
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        #lower_yellow = np.array([20,100,100])
-        #upper_yellow = np.array([50,255,255])
-#
-        #redMask = self.thresholdBinary(R, (220, 255))
-        mask = cv2.inRange(hsv, lower_white, upper_white)
-        #mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
-        mask_white = cv2.inRange(gray_image, 140, 255)
-        res = cv2.bitwise_and(img,img, mask= mask)
+        mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        
         M = cv2.moments(mask, False)
         stackedMask = np.dstack((mask, mask, mask))
         contourMask = stackedMask.copy()
@@ -94,9 +87,6 @@ class cvThread(threading.Thread):
         # Find the biggest contour (if detected)
         if len(contours) > 0:
             
-            c = max(contours, key=cv2.contourArea)
-            #M = cv2.moments(c)
-
             # Make sure that "m00" won't cause ZeroDivisionError: float division by zero
             if M["m00"] != 0:
                 cx = int(M["m10"] / M["m00"])
@@ -112,19 +102,27 @@ class cvThread(threading.Thread):
             cv2.line(crosshairMask,(cx,0),(cx,rows),(0,0,255),10)
             cv2.line(crosshairMask,(0,cy),(cols,cy),(0,0,255),10)
             cv2.line(crosshairMask,(int(cols/2),0),(int(cols/2),rows),(255,0,0),10)
-
-            # Chase the ball
-            #print(abs(cols/2 - cx), cx, cols)
+    
+            # Calculate error
             error = (cols/2 - cx)
-            P_rot = 0.15
-            P_lin = 1.5
-            #P controller for linear.x
-            self.cmd_vel.linear.x = P_lin*(1-abs(error)/(cols/2))
-            print(P_lin*(1-abs(error)/cols))
+            error_norm = error/(cols/2)
 
-            #P controller for angular.z
-            self.cmd_vel.angular.z = P_rot*error
-                
+            #coefficients
+            P_rot = 0.15
+            I_rot = 0.07
+            D_rot = 0.07
+
+            Max_Speed = 3
+            P_lin = 2
+
+            #P controller for linear.x
+            speed = Max_Speed*(1-P_lin*abs(error_norm))
+            self.cmd_vel.linear.x = speed
+
+            #PID controller for angular.z
+            self.cmd_vel.angular.z = P_rot*error + I_rot*error*0.1 + D_rot*(error-self.error_prev)
+            
+            self.error_prev = error
 
         else:
             self.cmd_vel.linear.x = 0.1
@@ -135,21 +133,6 @@ class cvThread(threading.Thread):
 
         # Return processed frames
         return mask, contourMask, crosshairMask
-
-    # Convert to RGB channels
-    def convert2rgb(self, img):
-        R = img[:, :, 2]
-        G = img[:, :, 1]
-        B = img[:, :, 0]
-
-        return R, G, B
-
-    # Apply threshold and result a binary image
-    def thresholdBinary(self, img, thresh=(200, 255)):
-        binary = np.zeros_like(img)
-        binary[(img >= thresh[0]) & (img <= thresh[1])] = 1
-
-        return binary*255
 
     # Add small images to the top row of the main image
     def addSmallPictures(self, img, small_images, size=(160, 120)):
@@ -197,7 +180,7 @@ cvThreadHandle.start()
 
 bridge = CvBridge()
 
-rospy.init_node('ball_chaser')
+rospy.init_node('line_follower')
 # Define your image topic
 image_topic = "/head_camera/image_raw"
 # Set up your subscriber and define its callback
