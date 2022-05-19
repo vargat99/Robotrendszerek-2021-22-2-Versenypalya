@@ -17,7 +17,7 @@
 # Versenyautó szimuláció a Hungaroringen
 
 ## Tartalomjegyzék
-- [Feladat ismertetése](#heading)
+- [Feladat ismertetése](#Feladat-ismertetése)
 - [Megvalósítás](#heading-1)
   * [Modellek létrehozása](#sub-heading-1)
   * [Kamera beállítás](#sub-heading-1)
