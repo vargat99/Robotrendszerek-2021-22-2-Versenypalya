@@ -16,6 +16,15 @@
 
 # Versenyautó szimuláció a Hungaroringen
 
+## Tartalomjegyzék
+- [Feladat ismertetése](#Feladat-ismertetése)
+- [Megvalósítás](#Megvalósítás)
+  * [Modellek létrehozása](#Modellek-létrehozása)
+  * [Kamera beállítás](#kamera-beállítása)
+  * [Vezérlés összehasonlítás - Köridők](#Vezérlés-összehasonlítás---Köridők)
+- [Eredmények](#Eredmények)
+- [Telepítési útmutató](#Telepítési-útmutató)
+
 ## Feladat ismertetése
 
 A projekt feladat során ROS környezetben készítettünk el egy versenyautó szimulációt, ami önállóan tud haladni egy adott pályán, kamera kép alapján. Az adott versenypálya - közös megegyezés alaján - a Hungaroing lett.
@@ -71,7 +80,7 @@ Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett,
  
  A legrosszabb eredményt az órán használt egyszerű vezérléssel tette meg a versenyautó: élesebb kanyarokban elakadt / leesett a pályáról. A legjobb eredményt a PID vezérléssel érte el, látványosan gyorsabban haladt a pályán mint a sima P szabályozással.
  
- ### Eredmény
+ ## Eredmény
  
  A végső modell képes a versenypálya közepén elhelyezett sárga vonalat - kamera kép alapján - követni, így képes több kört megtenni a pályán.
  
