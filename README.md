@@ -69,7 +69,7 @@ Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett,
 | ------------- | ------------- | ------------- | ------------- |
 | DNF  |1:30:00 <  | 1:15:00 <  | 1:13.447 |
  
- A legrosszabb eredményt az órán használt egyszerű vezérléssel tette meg a versenyautó: élesebb kanyarokban elakadt / leesett a pályáról. A legjobb eredményt a PID vezérléssel érte el, látványosan gyorsabban haladt a pályán mint a 
+ A legrosszabb eredményt az órán használt egyszerű vezérléssel tette meg a versenyautó: élesebb kanyarokban elakadt / leesett a pályáról. A legjobb eredményt a PID vezérléssel érte el, látványosan gyorsabban haladt a pályán mint a sima P szabályozással.
  
  ### Eredmény
  
