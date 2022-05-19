@@ -45,6 +45,7 @@ class cvThread(threading.Thread):
         self.cmd_vel.angular.z = 0
 
         self.error_prev = 0
+        self.error_sum = 0
 
     def run(self):
         # Create a single OpenCV window
@@ -109,7 +110,7 @@ class cvThread(threading.Thread):
 
             #coefficients
             P_rot = 0.15
-            I_rot = 0.07
+            I_rot = 0.0035
             D_rot = 0.07
 
             Max_Speed = 3
@@ -120,7 +121,8 @@ class cvThread(threading.Thread):
             self.cmd_vel.linear.x = speed
 
             #PID controller for angular.z
-            self.cmd_vel.angular.z = P_rot*error + I_rot*error*0.1 + D_rot*(error-self.error_prev)
+            self.error_sum += error*0.1 
+            self.cmd_vel.angular.z = P_rot*error + I_rot*self.error_sum + D_rot*(error-self.error_prev)
             
             self.error_prev = error
 
