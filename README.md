@@ -23,7 +23,7 @@ A projekt feladat során ROS környezetben készítettünk el egy versenyautó s
 
 ### Modellek létrehozása
 
-Elsőként a versenypálya került létrehozásra. Kritikus szempont volt, hogy az út közepén egy - előre meghatározott színű - felező vonalat helyezzünk el, amit a kamera kép alapján követhet a vezrélés. A sávnak elég kontrasztosnak kellett lennie, hogy könnyen elkülöníthető legyen az aszfalttól és egyéb objektumoktól, így a sárga - RGB:... - színt választottuk.
+Elsőként a versenypálya került létrehozásra. Kritikus szempont volt, hogy az út közepén egy - előre meghatározott színű - felező vonalat helyezzünk el, amit a kamera kép alapján követhet a vezrélés. A sávnak elég kontrasztosnak kellett lennie, hogy könnyen elkülöníthető legyen az aszfalttól és egyéb objektumoktól, így a sárga színt választottuk.
  <div align="center">
 <img src="images/palya_v2.png" alt="Logo" width="1340" height="764">
 </div>
@@ -51,6 +51,8 @@ Formula-1 2022 versenyautó általános modellje, ami egy vázból és 4 kerékb
 <img src="images/blender.png" alt="Logo" width="818" height="426">
 </div>
 
+Ellentétben az elterjedt versenyautók felépítésével itt mind a 4 kereket hajtjuk (összkerékhajtásos).
+
 ### Kamera beállítás
 
 A vonalkövetési feladathoz RGB kamerát használ a modell. Ezt a versenyautó tetéjén lévő "Halo"-hoz fix joint-tal rendeltük hozzá. A következő ábra mutatja be az autó által látott majd feldolgozott képet, a feldolgozáshoz OpenCV könyvtárat használtunk.
@@ -63,11 +65,11 @@ A navigáláshoz egy az autón elhelyezett kamera képét dolgoztuk fel az OpenC
 
 Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett, a cél: leggyorsabb köridő elérése. Több vezérlést teszteltünk, ezeket tartalmazza a következő táblázat:
  
-| Órai vezérlés körideje  | P vezérlés körideje | (Pályarekord F1)|
-| ------------- | ------------- | ------------- |
-| DNF  | 5:00  | 1:13.447 |
+| Órai vezérlés körideje  | P vezérlés körideje |PID vezérlés körideje | (Pályarekord F1)|
+| ------------- | ------------- | ------------- | ------------- |
+| DNF  |~1:30:00 | ~1:15:00  | 1:13.447 |
  
- A legrosszabb eredményt az órán használt egyszerű vezérléssel tette meg a versenyautó: élesebb kanyarokban elakadt. A legjobb eredményt a TODO vezérléssel érte el:.
+ A legrosszabb eredményt az órán használt egyszerű vezérléssel tette meg a versenyautó: élesebb kanyarokban elakadt. A legjobb eredményt a PID vezérléssel érte el.
  
  ### Eredmény
  
@@ -77,12 +79,27 @@ Az elkészült modell után, a megfelelő vezérlés fejlesztése  következett,
 <img src="images/ALL_car_camera.png" alt="Logo" width="1024" height="600">
 </div>
 
+A projekt futásáról elérhető youtube video:
+[![VIDEO](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
 ## Telepítési útmatató
 A projekt telepítése az alábbi lépésekből tevődik össze:
-* TODO
+* Git repo letöltése / klónozása
    ```sh
-   git clone https://github.com/TODO
+   git clone https://github.com/TODO](https://github.com/vargat99/Robotrendszerek-2021-22-2-Versenypalya.git
    ```
-* A projekt Python3-ban készült, ha korábbi verziók egyikével futtatná, akkor a "line_follower_v1" függvény első sorát kell módosítani.
+* Launch fájl indítása
+
+   ```sh
+   roslaunch versenypalya spawn_robot.launch 
+   ```
+   
+* A megfelelő vezérlés elindítása
+
+   ```sh
+   rosrun versenypalya line_follower_P.py
+   ``` 
+   
+* A projekt Python3-ban készült, ha korábbi verziók egyikével futtatná, akkor a "line_follower_P/PID" függvény első sorát kell módosítani.
 
 
